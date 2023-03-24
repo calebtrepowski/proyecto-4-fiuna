@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>414</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>414</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>414</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Cliente Modbus - Caleb Trepowski</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.png</normaloff>icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="leftVerticalLayout">
+      <item>
+       <widget class="QGroupBox" name="serialDeviceConfigurationGroupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Configuración del dispositivo</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QFormLayout" name="serialDeviceConfigurationFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="serialPortLabel">
+             <property name="text">
+              <string>Puerto</string>
+             </property>
+             <property name="buddy">
+              <cstring>serialPortComboBox</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="serialPortComboBox"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="serialBaudrateLabel">
+             <property name="text">
+              <string>Baudrate</string>
+             </property>
+             <property name="buddy">
+              <cstring>serialBaudrateComboBox</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="serialBaudrateComboBox"/>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QPushButton" name="serialPortConnectButton">
+             <property name="text">
+              <string>Conectar</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="serialDeviceModbusAddressLabel">
+             <property name="toolTip">
+              <string>Dirección del dispositivo MODBUS</string>
+             </property>
+             <property name="text">
+              <string>Direccion</string>
+             </property>
+             <property name="buddy">
+              <cstring>serialDeviceModbusAddressLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="serialDeviceModbusAddressLineEdit">
+             <property name="toolTip">
+              <string>Dirección del dispositivo MODBUS</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="rightVerticalLayout">
+      <item>
+       <widget class="QGroupBox" name="writeHoldingRegistersGroupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Escritura en Holding Register</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QFormLayout" name="writeHoldingRegistersFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="writeRegisterAddressLabel">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>Direccion (Hex)</string>
+             </property>
+             <property name="buddy">
+              <cstring>writeRegisterAddressLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="writeRegisterAddressLineEdit">
+             <property name="toolTip">
+              <string>Ejemplos: 16, 1A, 01, 0A</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="writeRegisterValueLabel">
+             <property name="text">
+              <string>Valor (Hex)</string>
+             </property>
+             <property name="buddy">
+              <cstring>writeRegisterValueLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="writeRegisterValueLineEdit">
+             <property name="toolTip">
+              <string>Ejemplos: 16, 1A, 01, 0A</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="writeRegisterButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Escribir</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="readInputRegisterGroupBox">
+        <property name="title">
+         <string>Lectura de Input Register</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <layout class="QFormLayout" name="readInputRegisterFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="readRegisterAddressLabel">
+             <property name="text">
+              <string>Direccion (Hex)</string>
+             </property>
+             <property name="buddy">
+              <cstring>readRegisterAddressLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="readRegisterAddressLineEdit">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="readRegisterValueLabel">
+             <property name="text">
+              <string>Valor (Hex)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="readRegisterValueLineEdit">
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="readRegisterButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Leer</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="writeCoilsGroupBox">
+        <property name="title">
+         <string>Escritura en Coils</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="writeCoilsBox1">
+           <item>
+            <widget class="QCheckBox" name="writeCoil1CheckBox">
+             <property name="text">
+              <string>Coil 100</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil2CheckBox">
+             <property name="text">
+              <string>Coil 101</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil3CheckBox">
+             <property name="text">
+              <string>Coil 102</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil4CheckBox">
+             <property name="text">
+              <string>Coil 4</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="writeCoilsBox2">
+           <item>
+            <widget class="QCheckBox" name="writeCoil5CheckBox">
+             <property name="text">
+              <string>Coil 5</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil6CheckBox">
+             <property name="text">
+              <string>Coil 6</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil7CheckBox">
+             <property name="text">
+              <string>Coil 7</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="writeCoil8CheckBox">
+             <property name="text">
+              <string>Coil 8</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="optionsMenu">
+    <property name="title">
+     <string>Opciones</string>
+    </property>
+    <addaction name="actionUpdatePorts"/>
+   </widget>
+   <addaction name="optionsMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionUpdatePorts">
+   <property name="text">
+    <string>Actualizar puertos</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>serialPortComboBox</tabstop>
+  <tabstop>serialBaudrateComboBox</tabstop>
+  <tabstop>serialDeviceModbusAddressLineEdit</tabstop>
+  <tabstop>serialPortConnectButton</tabstop>
+  <tabstop>writeRegisterAddressLineEdit</tabstop>
+  <tabstop>writeRegisterValueLineEdit</tabstop>
+  <tabstop>writeRegisterButton</tabstop>
+  <tabstop>readRegisterAddressLineEdit</tabstop>
+  <tabstop>readRegisterButton</tabstop>
+  <tabstop>writeCoil1CheckBox</tabstop>
+  <tabstop>writeCoil2CheckBox</tabstop>
+  <tabstop>writeCoil3CheckBox</tabstop>
+  <tabstop>writeCoil4CheckBox</tabstop>
+  <tabstop>writeCoil5CheckBox</tabstop>
+  <tabstop>writeCoil6CheckBox</tabstop>
+  <tabstop>writeCoil7CheckBox</tabstop>
+  <tabstop>writeCoil8CheckBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
