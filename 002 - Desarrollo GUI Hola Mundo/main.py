@@ -77,7 +77,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.campoNombre.setFocus()
 
     def keyPressEvent(self, a0: QtGui.QKeyEvent) -> None:
-        print(a0.modifiers())
         if a0.key() == QtCore.Qt.Key.Key_Return or a0.key() == QtCore.Qt.Key.Key_Enter:
             self.actualizar_saludo()
         if a0.key() == QtCore.Qt.Key.Key_Escape:
