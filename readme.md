@@ -18,4 +18,4 @@ More details about the assignment in the [excercise statement](/004%20-%20Desarr
 
 More details about the assignment in the [excercise statement](/005%20-%20Desarrollo%20GUI%20para%20MODBUS%20(UART)/Primer%20Parcial%20P4%202023.pdf).
 
-![Modbus Client Demo](/demo_gifs/004-serial_motor_controller_demo.gif)
+![Modbus Client Demo](/demo_gifs/)
