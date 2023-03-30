@@ -1,8 +1,8 @@
 import os
+os.chdir(os.path.dirname(__file__))
+
 from PyQt6 import QtWidgets, QtSerialPort, QtCore
 from ui_generated import Ui_MainWindow
-
-os.chdir(os.path.dirname(__file__))
 
 
 class SerialTerminal:
@@ -11,6 +11,7 @@ class SerialTerminal:
     ui: Ui_MainWindow
 
     serialPort: QtSerialPort.QSerialPort
+    timer: QtCore.QTimer
 
     BAUD_RATES = (
         QtSerialPort.QSerialPort.BaudRate.Baud1200.value,
@@ -27,6 +28,7 @@ class SerialTerminal:
         self.inicializarUI()
 
         self.serialPort = None
+        self.timer = None
 
     def inicializarUI(self) -> None:
         self.app = QtWidgets.QApplication([])
@@ -42,10 +44,7 @@ class SerialTerminal:
         self.ui.sendDataButton.setDisabled(True)
         self.ui.dataToSendTextEdit.setDisabled(True)
 
-        self.ui.updateReceivedDataButton.setDisabled(True)
-        self.ui.updateReceivedDataButton.clicked.connect(self.recibirDatos)
-
-        self.ui.receivedDataText.keyPressEvent = lambda e: None
+        self.ui.terminalOutputText.keyPressEvent = lambda e: None
 
         self.rellenarOpciones()
 
@@ -87,7 +86,8 @@ class SerialTerminal:
             self.ui.baudRateComboBox.setDisabled(True)
             self.ui.connectButton.setText("Desconectar")
             self.ui.dataToSendTextEdit.setDisabled(False)
-            self.ui.updateReceivedDataButton.setDisabled(False)
+
+            self.configurarTimer()
             return True
 
         return False
@@ -101,7 +101,9 @@ class SerialTerminal:
         self.ui.sendDataButton.setDisabled(True)
         self.ui.dataToSendTextEdit.clear()
         self.ui.dataToSendTextEdit.setDisabled(True)
-        self.ui.updateReceivedDataButton.setDisabled(True)
+
+        self.timer.stop()
+        self.timer = None
 
     def manejarConexionPuerto(self) -> None:
         if self.serialPort is not None:
@@ -111,18 +113,25 @@ class SerialTerminal:
         self._conectarPuerto()
 
     def enviarDatos(self) -> None:
+        textoAEnviar = self.ui.dataToSendTextEdit.toPlainText()
         self.serialPort.write(b"\n" +
-                              self.ui.dataToSendTextEdit.toPlainText().encode())
+                              textoAEnviar.encode())
+        self.ui.terminalOutputText.appendPlainText(textoAEnviar)
+        
+    def configurarTimer(self) -> None:
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.recibirDatos)
+        self.timer.start(100)
 
     def recibirDatos(self) -> None:
         while self.serialPort.bytesAvailable() > 0:
             data = self.serialPort.read(1)
             if data == b"\r":
                 self.serialPort.read(1)
-                textoAnterior = self.ui.receivedDataText.toPlainText()
+                textoAnterior = self.ui.terminalOutputText.toPlainText()
             else:
-                textoAnterior = self.ui.receivedDataText.toPlainText()
-            self.ui.receivedDataText.setPlainText(textoAnterior+data.decode())
+                textoAnterior = self.ui.terminalOutputText.toPlainText()
+            self.ui.terminalOutputText.setPlainText(textoAnterior+data.decode())
 
 
 if __name__ == "__main__":
